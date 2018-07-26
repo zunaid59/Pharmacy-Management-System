@@ -1,13 +1,14 @@
 @extends('layouts.admin')
 <style>
     .addForm{
-        margin-top: 100px;
+        margin-top: 50px;
+        margin-left: 100px;
     }
 </style>
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-sm-4 col-md-4 addForm">
+
+            <h3 align="center">ADD Medicine</h3>
+            <div class=" col-md-6 addForm" >
                 <form action="{{url('/medicine')}}" method="post">
                     {{csrf_field()}}
 
@@ -32,8 +33,6 @@
                     <input type="submit" class="btn btn-info">
                 </form>
             </div>
-        </div>
-    </div>
 
 
 

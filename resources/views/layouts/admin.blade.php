@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="row top">
             <div class="col-sm-2 left">
-                <div class="logo"><a href="{{url('/home')}}">{{ config('app.name', 'Project Management') }}</a>
+                <div class="logo"><a href="{{url('/home')}}">{{ config('app.name', 'Pharmacy Management System') }}</a>
 
                 </div>
             </div>

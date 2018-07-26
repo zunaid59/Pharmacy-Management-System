@@ -27,6 +27,14 @@
                     <td>{!! $item->quantity!!}</td>
                     <td>
                         <a href="{!! url('medicine') !!}/{!! $item->id !!}/{!! 'edit'!!}" class="btn btn-sm btn-info">Edit</a>
+
+                        <form  action="{{url('/medicine')}}/{{$item->id}}" method="post">
+                            @method('DELETE')
+                            {!! csrf_field() !!}
+
+                            <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+
+                        </form>
                     </td>
                 </tr>
                 @endforeach

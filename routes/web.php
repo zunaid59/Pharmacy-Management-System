@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/test', function () {
@@ -33,5 +33,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/invoice','InvoiceController');
+
+Route::get('/findPrice', array('as'=>'findPrice','uses'=>'InvoiceController@findPrice'));
 
 

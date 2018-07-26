@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\Invoice;
 use App\Medicine;
 use Illuminate\Http\Request;
@@ -41,12 +42,30 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Invoice();
+        $customer = new Customer();
 
-        $data->fill($request->all());
-        $data['totalAmount'] = $data['price']*$data['quantity'];
-        $data->save();
-        return redirect('invoice');
+        $customer->fill($request->all());
+        if($customer->save()){
+
+            $id = $customer->id;
+
+                foreach($request->medicineName as $key =>$value) {
+                    $data = array(
+                        'customer_id' => $id,
+                        'medicine_id' => $value,
+                        'invoiceNum' => $request->invoiceNum,
+                        'date' => $request->date,
+                        'quantity' => $request->quantity[$key],
+                        'price' => $request->price[$key],
+                        'totalAmount' => $request->amount[$key],
+                    );
+                    Invoice::insert($data);
+
+                }
+        }
+
+        return back();
+
     }
 
     /**
@@ -57,7 +76,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+
     }
 
     /**
@@ -92,5 +111,12 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+
+    public function findPrice(Request $request){
+
+        $data = Medicine::select('sell_price')->where('id',$request->id)->first();
+        return response()->json($data);
+
     }
 }
